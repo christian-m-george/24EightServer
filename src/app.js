@@ -18,18 +18,18 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-// const sslServer = https.createServer({
-//     key: fs.readFileSync(path.join(__dirname, 'SSL', 'key.pem')), 
-//     cert: fs.readFileSync(path.join(__dirname, 'SSL', 'cert.pem')),
-// }, 
-// app
-// )
+const sslServer = https.createServer({
+    key: fs.readFileSync(path.join(__dirname, 'SSL', 'key.pem')), 
+    cert: fs.readFileSync(path.join(__dirname, 'SSL', 'cert.pem')),
+}, 
+app
+)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')
 })
 
-// sslServer.listen(3443, () => console.log('Secure server on port 3443'))
+sslServer.listen(3443, () => console.log('Secure server on port 3443'))
 
 app.use(function errorHandler(error, req, res, next) {
     let response
